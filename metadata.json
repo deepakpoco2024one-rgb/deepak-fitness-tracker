@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Deepak's Fitness Tracker",
+  "description": "A clean, modern web application to track daily weight, calories, meals, and workouts. It features a weekly template system for recurring schedules with the flexibility to edit any day's plan, and visualizes progress through charts and summaries.",
+  "requestFramePermissions": []
+}
