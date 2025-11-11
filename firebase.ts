@@ -5,12 +5,12 @@ import 'firebase/compat/firestore';
 
 // IMPORTANT: Replace this with the firebaseConfig object from your Firebase project
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCN5Pxuz-tbWeYeEPvzPy6hAy68ArK6qWI",
+  authDomain: "deepaks-mind-10920641-ed594.firebaseapp.com",
+  projectId: "deepaks-mind-10920641-ed594",
+  storageBucket: "deepaks-mind-10920641-ed594.appspot.com",
+  messagingSenderId: "535820398365",
+  appId: "1:535820398365:web:14939fcfe3196c5fecfbf4"
 };
 
 // Initialize Firebase
