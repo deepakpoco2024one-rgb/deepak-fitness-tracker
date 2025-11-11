@@ -1,9 +1,12 @@
+
 import React, { useState, useMemo } from 'react';
 import useWeeklyData from './hooks/useWeeklyData';
 import Dashboard from './components/Dashboard';
 import DailyTracker from './components/DailyTracker';
 import { Day, UserProfile } from './types';
 import { Icon } from './components/Icon';
+import { AuthProvider, useAuth } from './hooks/useAuth';
+import LoginPage from './components/LoginPage';
 
 const getWeekStartDate = (date: Date): Date => {
   const d = new Date(date);
@@ -31,11 +34,12 @@ const formatDateRange = (startDate: Date): string => {
 }
 
 
-const App: React.FC = () => {
+const FitnessTrackerApp: React.FC = () => {
+  const { user, loading, signOut } = useAuth();
   const [currentDate, setCurrentDate] = useState(new Date());
   const weekStartDate = useMemo(() => getWeekStartDate(currentDate), [currentDate]);
 
-  const { weeklyData, updateDay, setWeeklyData, isLoading } = useWeeklyData(weekStartDate);
+  const { weeklyData, updateDay, setWeeklyData, isLoading } = useWeeklyData(weekStartDate, user);
   const [selectedDayIndex, setSelectedDayIndex] = useState<number | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile>({
     height: 177,
@@ -81,6 +85,14 @@ const App: React.FC = () => {
 
   const selectedDayData: Day | undefined = selectedDayIndex !== null ? weeklyData[selectedDayIndex] : undefined;
 
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center text-slate-500">Loading...</div>;
+  }
+  
+  if (!user) {
+    return <LoginPage />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans">
       <header className="bg-white shadow-sm sticky top-0 z-10">
@@ -90,6 +102,12 @@ const App: React.FC = () => {
               <Icon name="dumbbell" className="w-6 h-6 text-white" />
             </div>
             <h1 className="text-2xl font-bold text-slate-900">Deepak's Fitness Tracker</h1>
+          </div>
+          <div className="flex items-center gap-4">
+              <p className="text-sm text-slate-600 hidden sm:block">Welcome, {user.displayName}</p>
+              <button onClick={signOut} className="px-3 py-1.5 text-sm font-semibold text-slate-600 bg-slate-100 rounded-md hover:bg-slate-200">
+                  Logout
+              </button>
           </div>
         </div>
       </header>
@@ -104,13 +122,11 @@ const App: React.FC = () => {
                     Today
                 </button>
                 <button onClick={handleNextWeek} className="p-2 rounded-md bg-white border border-slate-300 hover:bg-slate-100 transition-colors shadow-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                    </svg>
+                    <Icon name="arrowRight" className="w-5 h-5" />
                 </button>
             </div>
         </div>
-        {isLoading ? (
+        {(isLoading || loading) ? (
             <div className="text-center py-20 text-slate-500">
                 <p>Loading your week...</p>
             </div>
@@ -139,5 +155,11 @@ const App: React.FC = () => {
     </div>
   );
 };
+
+const App: React.FC = () => (
+    <AuthProvider>
+        <FitnessTrackerApp />
+    </AuthProvider>
+);
 
 export default App;

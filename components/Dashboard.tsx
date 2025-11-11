@@ -1,9 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 // FIX: Import MealItem for type annotation
 import { Day, MealItem, UserProfile } from '../types';
 import WeightChart from './WeightChart';
 import CaloriesChart from './CaloriesChart';
 import ProteinChart from './ProteinChart';
+import PrinciplesCard from './PrinciplesCard';
 import { Icon } from './Icon';
 // FIX: Import IconName for type annotation
 import type { IconName } from './Icon';
@@ -70,6 +72,8 @@ const Dashboard: React.FC<DashboardProps> = ({ weeklyData, userProfile, onSelect
             color="text-red-500" 
         />
       </div>
+
+      <PrinciplesCard />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="bg-white p-6 rounded-xl shadow-md">

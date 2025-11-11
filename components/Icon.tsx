@@ -1,7 +1,8 @@
 
 import React from 'react';
 
-export type IconName = 'dumbbell' | 'checkCircle' | 'scale' | 'calendar' | 'award' | 'flame' | 'arrowLeft' | 'plus' | 'trash' | 'user' | 'arrowsUpDown' | 'steak';
+// FIX: Add 'chevronDown' to support it as a valid icon name.
+export type IconName = 'dumbbell' | 'checkCircle' | 'scale' | 'calendar' | 'award' | 'flame' | 'arrowLeft' | 'arrowRight' | 'plus' | 'trash' | 'user' | 'arrowsUpDown' | 'steak' | 'lightbulb' | 'chevronDown';
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
@@ -53,10 +54,29 @@ export const Icon: React.FC<IconProps> = ({ name, ...props }) => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.287 8.287 0 0 0 3-7.184 8.25 8.25 0 0 1 3.362 2.797Z" />
             </svg>
         );
+    case 'lightbulb':
+        return (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.311a6.01 6.01 0 01-1.5.189m1.5-.189a6.01 6.01 0 001.5.189m-1.5-3.033a6.01 6.01 0 01-1.5-.189m1.5.189a6.01 6.01 0 00-1.5-.189m12.06-6.478a6.01 6.01 0 00-1.5.189m1.5-.189a6.01 6.01 0 011.5.189m-9.75 1.134a6.01 6.01 0 00-1.5-.189m1.5.189a6.01 6.01 0 01-1.5-.189m1.5 3.033a6.01 6.01 0 00-1.5.189m1.5-.189a6.01 6.01 0 01-1.5.189m9.75-1.134a6.01 6.01 0 01-1.5.189m1.5-.189a6.01 6.01 0 00-1.5-.189M12 8.25a2.25 2.25 0 012.25 2.25v2.25a2.25 2.25 0 01-4.5 0V10.5A2.25 2.25 0 0112 8.25z" />
+            </svg>
+        );
     case 'arrowLeft':
       return (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+      );
+    // FIX: Add 'arrowRight' icon for UI consistency.
+    case 'arrowRight':
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+        </svg>
+      );
+    case 'chevronDown':
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
         </svg>
       );
     case 'plus':
