@@ -1,9 +1,7 @@
-// FIX: Import firebase to initialize the app and access firebase services.
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
-// IMPORTANT: Replace this with the firebaseConfig object from your Firebase project
 const firebaseConfig = {
   apiKey: "AIzaSyCN5Pxuz-tbWeYeEPvzPy6hAy68ArK6qWI",
   authDomain: "deepaks-mind-10920641-ed594.firebaseapp.com",
@@ -13,12 +11,8 @@ const firebaseConfig = {
   appId: "1:535820398365:web:14939fcfe3196c5fecfbf4"
 };
 
-// Initialize Firebase
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
-
-const auth = firebase.auth();
-const db = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 export { auth, db };
