@@ -6,26 +6,26 @@ const LoginPage: React.FC = () => {
     const { signInWithGoogle } = useAuth();
     
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50">
-            <div className="text-center p-8">
-                 <div className="flex items-center justify-center gap-3 mb-6">
-                    <div className="bg-blue-500 p-3 rounded-xl">
-                      <Icon name="dumbbell" className="w-8 h-8 text-white" />
-                    </div>
-                    <h1 className="text-4xl font-bold text-slate-900">Deepak's Fitness Tracker</h1>
-                 </div>
-                 <p className="text-slate-600 mb-8 max-w-md">
-                     Welcome! Please sign in to track your fitness journey and access your personalized dashboard from any device.
-                 </p>
-                 <button 
-                    onClick={signInWithGoogle}
-                    className="inline-flex items-center gap-3 bg-white text-slate-700 px-6 py-3 rounded-lg shadow-md border border-slate-200 font-semibold hover:bg-slate-100 transition-colors"
-                 >
-                    <GoogleIcon />
-                    Sign in with Google
-                 </button>
+        <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4">
+            <div className="flex-grow flex flex-col items-center justify-center text-center">
+                <div className="bg-blue-600 p-3 rounded-xl mb-6">
+                  <Icon name="dumbbell" className="w-8 h-8 text-white" />
+                </div>
+                <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
+                  DeepFit Tracker
+                </h1>
+                <p className="text-slate-600 mb-8 max-w-sm">
+                    Welcome! Please sign in to track your fitness journey and access your personalized dashboard from any device.
+                </p>
+                <button 
+                   onClick={signInWithGoogle}
+                   className="inline-flex items-center gap-3 bg-white text-slate-700 px-6 py-3 rounded-lg shadow-sm border border-slate-200 font-semibold hover:bg-slate-100 transition-colors"
+                >
+                   <GoogleIcon />
+                   Sign in with Google
+                </button>
             </div>
-            <footer className="absolute bottom-4 text-center p-4 text-slate-500 text-sm">
+            <footer className="w-full text-center p-4 text-slate-500 text-sm">
                 <p>Built by Deepak and AI ;)</p>
             </footer>
         </div>

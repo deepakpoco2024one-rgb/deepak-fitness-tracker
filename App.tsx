@@ -92,6 +92,11 @@ const FitnessTrackerApp: React.FC = () => {
   if (!user) {
     return <LoginPage />;
   }
+  
+  const getFirstName = (displayName: string | null) => {
+    if (!displayName) return 'User';
+    return displayName.split(' ')[0];
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans">
@@ -101,10 +106,10 @@ const FitnessTrackerApp: React.FC = () => {
             <div className="bg-blue-500 p-2 rounded-lg">
               <Icon name="dumbbell" className="w-6 h-6 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-slate-900">Deepak's Fitness Tracker</h1>
+            <h1 className="text-2xl font-bold text-slate-900">{getFirstName(user.displayName)}'s Fitness Tracker</h1>
           </div>
           <div className="flex items-center gap-4">
-              <p className="text-sm text-slate-600 hidden sm:block">Welcome, {user.displayName}</p>
+              <p className="text-sm text-slate-600 hidden sm:block">Welcome, {getFirstName(user.displayName)}</p>
               <button onClick={signOut} className="px-3 py-1.5 text-sm font-semibold text-slate-600 bg-slate-100 rounded-md hover:bg-slate-200">
                   Logout
               </button>

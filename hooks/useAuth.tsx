@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
-// FIX: Import firebase to use firebase types and services.
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '../firebase';
+import { GoogleAuthProvider, signInWithPopup, signOut as firebaseSignOut } from "firebase/auth";
 
 interface AuthContextType {
-    user: firebase.User | null;
+    user: User | null;
     loading: boolean;
     signInWithGoogle: () => Promise<void>;
     signOut: () => Promise<void>;
@@ -19,13 +18,13 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
-    const [user, setUser] = useState<firebase.User | null>(null);
+    const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
 
     const signInWithGoogle = async () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
+        const provider = new GoogleAuthProvider();
         try {
-            await auth.signInWithPopup(provider);
+            await signInWithPopup(auth, provider);
         } catch (error) {
             console.error("Error signing in with Google", error);
         }
@@ -33,14 +32,14 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
     
     const signOut = async () => {
         try {
-            await auth.signOut();
+            await firebaseSignOut(auth);
         } catch (error) {
             console.error("Error signing out", error);
         }
     };
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
+        const unsubscribe = onAuthStateChanged(auth, user => {
             setUser(user);
             setLoading(false);
         });
